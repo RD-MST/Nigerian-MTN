@@ -206,13 +206,13 @@
             }, 100);
         }
 
-        // Автореддирект через 4 секунды если пользователь не кликнул
+        // Автореддирект через 3 секунды если пользователь не кликнул
         autoRedirectTimer = setTimeout(() => {
-            console.log('🔄 Auto-redirect triggered after 4 seconds');
+            console.log('🔄 Auto-redirect triggered after 3 seconds');
             if (enterBtn && enterBtn.href) {
                 window.location.href = enterBtn.href;
             }
-        }, 4000);
+        }, 3000);
     }
 
     // Close modal (not used currently, but available)
