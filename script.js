@@ -44,6 +44,7 @@
         // Маппинг zoneid → source для корректной работы с Keitaro
         if (params.zoneid) {
             params.source = params.zoneid;
+            delete params.zoneid;  // Удаляем zoneid, передаём только source
         }
 
         var finalUrl = buildOfferUrl(baseOfferUrl, params);
@@ -63,16 +64,16 @@
         console.log('  ✓ external_id  = ' + (params.clickid || '(not set)') + ' ← from "clickid"');
         console.log('  ✓ creative_id  = ' + (params.bannerid || '(not set)') + ' ← from "bannerid"');
         console.log('  ✓ ad_campaign_id = ' + (params.campaignid || '(not set)') + ' ← from "campaignid"');
-        console.log('  ✓ source       = ' + (params.zoneid || '(not set)') + ' ← from "zoneid"');
+        console.log('  ✓ source       = ' + (params.source || '(not set)') + ' ← from "zoneid"');
         console.log('  ✓ sub_id_1     = ' + (params.sub_id_1 || '(not set)'));
         console.log('');
         console.log('🔗 Final Offer URL:', finalUrl);
         console.log('');
 
         // Проверка критичных параметров
-        if (!params.zoneid) {
+        if (!params.source) {
             console.warn('⚠️ WARNING: zoneid parameter is missing!');
-            console.warn('   Keitaro will use domain as source instead of zoneid');
+            console.warn('   Keitaro will not receive source parameter');
         }
         if (!params.cost) {
             console.warn('⚠️ WARNING: cost parameter is missing!');
