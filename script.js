@@ -34,16 +34,31 @@
     window.updateAllCTALinks = function() {
         var baseOfferUrl = 'https://veotrustkol.com/NMVTN7sQ';
         var params = getAllUrlParams();
+
+        // Добавляем обязательный параметр currency=usd для Keitaro
+        if (!params.currency) {
+            params.currency = 'usd';
+        }
+
         var finalUrl = buildOfferUrl(baseOfferUrl, params);
 
         console.log('═══ UTM TRACKING ═══');
-        console.log('Parameters:', params);
-        console.log('Final URL:', finalUrl);
+        console.log('Incoming Parameters:', params);
+        console.log('Final Offer URL:', finalUrl);
+        console.log('Keitaro will map these parameters:');
+        console.log('  - keyword from URL param "keyword"');
+        console.log('  - cost from URL param "cost"');
+        console.log('  - currency = usd (hardcoded)');
+        console.log('  - external_id from URL param "clickid"');
+        console.log('  - creative_id from URL param "bannerid"');
+        console.log('  - ad_campaign_id from URL param "campaignid"');
+        console.log('  - source from URL param "zoneid"');
+        console.log('  - sub_id_1 from URL param "sub_id_1"');
 
         var links = document.querySelectorAll('a[href*="TEMPORARY-OFFER-URL"], a#enterBtn');
         links.forEach(function(link) { link.href = finalUrl; });
-        
-        console.log('Updated ' + links.length + ' links');
+
+        console.log('Updated ' + links.length + ' CTA links');
         console.log('════════════════════');
     };
 
