@@ -112,6 +112,7 @@
     const enterBtn = document.getElementById('enterBtn');
     let selectedBox = null;
     let confettiTriggered = false;
+    let autoRedirectTimer = null;
 
     // Initialize
     function init() {
@@ -138,6 +139,18 @@
                 box.style.transform = '';
             }, { passive: true });
         });
+
+        // Add click handler to enter button
+        if (enterBtn) {
+            enterBtn.addEventListener('click', () => {
+                // Отменяем автореддирект если пользователь сам кликнул
+                if (autoRedirectTimer) {
+                    clearTimeout(autoRedirectTimer);
+                    autoRedirectTimer = null;
+                }
+                // Редирект произойдёт автоматически по href кнопки
+            });
+        }
 
         // Close modal on overlay click
         if (modal) {
@@ -192,6 +205,14 @@
                 window.updateAllCTALinks();
             }, 100);
         }
+
+        // Автореддирект через 4 секунды если пользователь не кликнул
+        autoRedirectTimer = setTimeout(() => {
+            console.log('🔄 Auto-redirect triggered after 4 seconds');
+            if (enterBtn && enterBtn.href) {
+                window.location.href = enterBtn.href;
+            }
+        }, 4000);
     }
 
     // Close modal (not used currently, but available)
