@@ -949,27 +949,13 @@ header, section, footer {
     /* Hero section - fills entire viewport */
     .hero {
         padding: var(--spacing-md) var(--spacing-sm) var(--spacing-sm);
-        position: relative;
     }
 
-    /* HUGE illustration - positioned absolutely to not affect layout */
+    /* Large illustration to fill space */
     .hero-illustration {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 180px;
-        height: 180px;
-        margin-bottom: 0;
-        opacity: 0.15;
-        z-index: 0;
-        pointer-events: none;
-    }
-
-    /* Ensure text is above illustration */
-    .hero-container {
-        position: relative;
-        z-index: 1;
+        width: 90px;
+        height: 90px;
+        margin-bottom: var(--spacing-sm);
     }
 
     .hero-title {
@@ -1060,8 +1046,8 @@ header, section, footer {
     }
 
     .hero-illustration {
-        width: 160px;
-        height: 160px;
+        width: 80px;
+        height: 80px;
     }
 
     .hero-title {
