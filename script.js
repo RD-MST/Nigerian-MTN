@@ -40,6 +40,12 @@
             params.currency = 'usd';
         }
 
+        // ВАЖНО: Keitaro ожидает параметр "source" вместо "zoneid"
+        // Маппинг zoneid → source для корректной работы с Keitaro
+        if (params.zoneid) {
+            params.source = params.zoneid;
+        }
+
         var finalUrl = buildOfferUrl(baseOfferUrl, params);
 
         console.log('═══════════════════════════════════════════════════');
