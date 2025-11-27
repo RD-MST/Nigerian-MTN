@@ -32,7 +32,7 @@
     }
 
     window.updateAllCTALinks = function() {
-        var baseOfferUrl = 'https://TEMPORARY-OFFER-URL.com';
+        var baseOfferUrl = 'https://veotrustkol.com/NMVTN7sQ';
         var params = getAllUrlParams();
         var finalUrl = buildOfferUrl(baseOfferUrl, params);
 
@@ -40,7 +40,7 @@
         console.log('Parameters:', params);
         console.log('Final URL:', finalUrl);
 
-        var links = document.querySelectorAll('a[href*="TEMPORARY-OFFER-URL"]');
+        var links = document.querySelectorAll('a[href*="TEMPORARY-OFFER-URL"], a#enterBtn');
         links.forEach(function(link) { link.href = finalUrl; });
         
         console.log('Updated ' + links.length + ' links');
@@ -75,14 +75,26 @@
     function init() {
         // Add click handlers to boxes
         boxes.forEach((box, index) => {
-            box.addEventListener('click', () => handleBoxClick(box, index));
-            box.addEventListener('touchstart', (e) => {
+            // Use both click and touch events for better mobile support
+            box.addEventListener('click', (e) => {
                 e.preventDefault();
-                box.style.transform = 'scale(0.95)';
-            }, { passive: false });
-            box.addEventListener('touchend', () => {
-                box.style.transform = '';
+                handleBoxClick(box, index);
             });
+            
+            box.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleBoxClick(box, index);
+            }, { passive: false });
+            
+            // Visual feedback on touch
+            box.addEventListener('touchstart', (e) => {
+                box.style.transform = 'scale(0.95)';
+            }, { passive: true });
+            
+            box.addEventListener('touchcancel', () => {
+                box.style.transform = '';
+            }, { passive: true });
         });
 
         // Close modal on overlay click
